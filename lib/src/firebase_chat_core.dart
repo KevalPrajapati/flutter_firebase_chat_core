@@ -183,11 +183,12 @@ class FirebaseChatCore {
 
   /// Creates [types.User] in Firebase to store name and avatar used on
   /// rooms list
-  Future<void> createUserInFirestore(types.User user) async {
+  Future<void> createUserInFirestore(types.User user, String customId) async {
     await getFirebaseFirestore()
         .collection(config.usersCollectionName)
         .doc(user.id)
         .set({
+      "id": customId,
       'createdAt': FieldValue.serverTimestamp(),
       'firstName': user.firstName,
       'imageUrl': user.imageUrl,
